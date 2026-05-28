@@ -474,22 +474,32 @@ export default function App() {
                     {expandedCats['Event Info'] && (
                       <div className="flex flex-col pl-4 pr-1 mt-2.5 space-y-1.5 border-l border-[#222230] ml-6 pb-2.5">
                         {[
-                          'General Information',
-                          'Event Criteria Values',
-                          'Check in Status',
-                          'Service Order Checkin',
-                          'Print Namebadge from Qrcode'
-                        ].map((subItem) => {
-                          return (
-                            <button
-                              key={subItem}
-                              type="button"
-                              className="block w-full text-left text-[13px] transition-all py-2 px-4 rounded-xl font-semibold leading-tight text-[#8B8B98] hover:text-[#F4F4F6] hover:bg-[#1C1C26]/40 cursor-pointer"
-                            >
-                              {subItem}
-                            </button>
-                          );
-                        })}
+                          { label: 'General Information', screen: 'event-manager' as const },
+                          { label: 'Event Criteria Values', screen: 'criteria-manager' as const },
+                          { label: 'Check in Status', screen: null },
+                          { label: 'Service Order Checkin', screen: null },
+                          { label: 'Print Namebadge from Qrcode', screen: null },
+                        ].map(({ label, screen }) => (
+                          <button
+                            key={label}
+                            type="button"
+                            onClick={() => {
+                              if (screen) {
+                                setActiveScreen(screen);
+                                triggerToast(`Navigated to ${label}.`);
+                              } else {
+                                triggerToast(`${label} — coming soon.`);
+                              }
+                            }}
+                            className={`block w-full text-left text-[13px] transition-all py-2 px-4 rounded-xl font-semibold leading-tight cursor-pointer ${
+                              screen && activeScreen === screen
+                                ? 'bg-[#F35D00] text-white font-bold shadow-md shadow-[#F35D00]/15'
+                                : 'text-[#8B8B98] hover:text-[#F4F4F6] hover:bg-[#1C1C26]/40'
+                            }`}
+                          >
+                            {label}
+                          </button>
+                        ))}
                       </div>
                     )}
                   </div>
@@ -528,7 +538,12 @@ export default function App() {
 
                         <button
                           type="button"
-                          className="block w-full text-left text-[13px] py-2 px-4 rounded-xl font-semibold leading-tight text-[#8B8B98] hover:text-[#F4F4F6] hover:bg-[#1C1C26]/40 cursor-pointer transition-all"
+                          onClick={() => { setActiveScreen('criteria-manager'); triggerToast("Navigated to Criteria Manager."); }}
+                          className={`block w-full text-left text-[13px] py-2 px-4 rounded-xl font-semibold leading-tight cursor-pointer transition-all ${
+                            activeScreen === 'criteria-manager'
+                              ? 'bg-[#F35D00] text-white font-bold shadow-md shadow-[#F35D00]/15'
+                              : 'text-[#8B8B98] hover:text-[#F4F4F6] hover:bg-[#1C1C26]/40'
+                          }`}
                         >
                           Criteria Manager
                         </button>
@@ -567,35 +582,85 @@ export default function App() {
                   <div className="flex flex-col">
                     <button
                       type="button"
-                      className="w-full text-left flex justify-between items-center transition-all font-sans px-4 py-3 rounded-xl cursor-default bg-transparent text-[#8B8B98] hover:text-[#F4F4F6] hover:bg-[#1C1C26]/20"
+                      onClick={() => toggleCategory('Resources')}
+                      className={`w-full text-left flex justify-between items-center transition-all font-sans px-4 py-3 rounded-xl cursor-pointer ${
+                        expandedCats['Resources']
+                          ? 'bg-[#1C1C26] text-white border border-[#2B2B3D]/30 shadow-md'
+                          : 'bg-transparent text-[#8B8B98] hover:text-[#F4F4F6] hover:bg-[#1C1C26]/40'
+                      }`}
                     >
                       <div className="flex items-center gap-2.5">
-                        <Cpu className="w-[18px] h-[18px] shrink-0 text-[#8B8B98]" />
+                        <Cpu className={`w-[18px] h-[18px] shrink-0 transition-colors ${expandedCats['Resources'] ? 'text-[#F35D00]' : 'text-[#8B8B98]'}`} />
                         <span className="text-[13.5px] font-bold tracking-wide">Resources</span>
                       </div>
-                      <ChevronRight className="w-4 h-4 text-[#8B8B98]" />
+                      <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${expandedCats['Resources'] ? 'rotate-180 text-white' : 'text-[#8B8B98]'}`} />
                     </button>
+                    {expandedCats['Resources'] && (
+                      <div className="flex flex-col pl-4 pr-1 mt-2.5 space-y-1.5 border-l border-[#222230] ml-6 pb-2.5">
+                        {['Documents', 'Media Library', 'Floor Plans'].map((item) => (
+                          <button
+                            key={item}
+                            type="button"
+                            onClick={() => triggerToast(`${item} — coming soon.`)}
+                            className="block w-full text-left text-[13px] transition-all py-2 px-4 rounded-xl font-semibold leading-tight text-[#8B8B98] hover:text-[#F4F4F6] hover:bg-[#1C1C26]/40 cursor-pointer"
+                          >
+                            {item}
+                          </button>
+                        ))}
+                      </div>
+                    )}
                   </div>
 
                   {/* 4. HOTEL */}
                   <div className="flex flex-col">
                     <button
                       type="button"
-                      className="w-full text-left flex justify-between items-center transition-all font-sans px-4 py-3 rounded-xl cursor-default bg-transparent text-[#8B8B98] hover:text-[#F4F4F6] hover:bg-[#1C1C26]/20"
+                      onClick={() => toggleCategory('Hotel')}
+                      className={`w-full text-left flex justify-between items-center transition-all font-sans px-4 py-3 rounded-xl cursor-pointer ${
+                        expandedCats['Hotel']
+                          ? 'bg-[#1C1C26] text-white border border-[#2B2B3D]/30 shadow-md'
+                          : 'bg-transparent text-[#8B8B98] hover:text-[#F4F4F6] hover:bg-[#1C1C26]/40'
+                      }`}
                     >
                       <div className="flex items-center gap-2.5">
-                        <Globe className="w-[18px] h-[18px] shrink-0 text-[#8B8B98]" />
+                        <Globe className={`w-[18px] h-[18px] shrink-0 transition-colors ${expandedCats['Hotel'] ? 'text-[#F35D00]' : 'text-[#8B8B98]'}`} />
                         <span className="text-[13.5px] font-bold tracking-wide">Hotel</span>
                       </div>
-                      <ChevronRight className="w-4 h-4 text-[#8B8B98]" />
+                      <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${expandedCats['Hotel'] ? 'rotate-180 text-white' : 'text-[#8B8B98]'}`} />
                     </button>
+                    {expandedCats['Hotel'] && (
+                      <div className="flex flex-col pl-4 pr-1 mt-2.5 space-y-1.5 border-l border-[#222230] ml-6 pb-2.5">
+                        <button
+                          type="button"
+                          onClick={() => { setActiveScreen('hotel-manager'); triggerToast("Navigated to Hotel Rooming Block."); }}
+                          className={`block w-full text-left text-[13px] transition-all py-2 px-4 rounded-xl font-semibold leading-tight cursor-pointer ${
+                            activeScreen === 'hotel-manager'
+                              ? 'bg-[#F35D00] text-white font-bold shadow-md shadow-[#F35D00]/15'
+                              : 'text-[#8B8B98] hover:text-[#F4F4F6] hover:bg-[#1C1C26]/40'
+                          }`}
+                        >
+                          Rooming Block
+                        </button>
+                        {['Room Allocation', 'Hotel Contracts'].map((item) => (
+                          <button
+                            key={item}
+                            type="button"
+                            onClick={() => triggerToast(`${item} — coming soon.`)}
+                            className="block w-full text-left text-[13px] transition-all py-2 px-4 rounded-xl font-semibold leading-tight text-[#8B8B98] hover:text-[#F4F4F6] hover:bg-[#1C1C26]/40 cursor-pointer"
+                          >
+                            {item}
+                          </button>
+                        ))}
+                      </div>
+                    )}
                   </div>
 
                   {/* 5. SALES */}
                   <div className="flex flex-col">
                     <button
                       type="button"
-                      className="w-full text-left flex justify-between items-center transition-all font-sans px-4 py-3 rounded-xl cursor-default bg-transparent text-[#8B8B98] hover:text-[#F4F4F6] hover:bg-[#1C1C26]/20"
+                      onClick={() => triggerToast("Sales module — coming soon.")}
+                      className="w-full text-left flex justify-between items-center transition-all font-sans px-4 py-3 rounded-xl cursor-pointer bg-transparent text-[#8B8B98] hover:text-[#F4F4F6] hover:bg-[#1C1C26]/40"
                     >
                       <div className="flex items-center gap-2.5">
                         <TrendingUp className="w-[18px] h-[18px] shrink-0 text-[#8B8B98]" />
@@ -609,7 +674,8 @@ export default function App() {
                   <div className="flex flex-col">
                     <button
                       type="button"
-                      className="w-full text-left flex justify-between items-center transition-all font-sans px-4 py-3 rounded-xl cursor-default bg-transparent text-[#8B8B98] hover:text-[#F4F4F6] hover:bg-[#1C1C26]/20"
+                      onClick={() => triggerToast("Reporting module — coming soon.")}
+                      className="w-full text-left flex justify-between items-center transition-all font-sans px-4 py-3 rounded-xl cursor-pointer bg-transparent text-[#8B8B98] hover:text-[#F4F4F6] hover:bg-[#1C1C26]/40"
                     >
                       <div className="flex items-center gap-2.5">
                         <BarChart3 className="w-[18px] h-[18px] shrink-0 text-[#8B8B98]" />
@@ -623,7 +689,8 @@ export default function App() {
                   <div className="flex flex-col">
                     <button
                       type="button"
-                      className="w-full text-left flex justify-between items-center transition-all font-sans px-4 py-3 rounded-xl cursor-default bg-transparent text-[#8B8B98] hover:text-[#F4F4F6] hover:bg-[#1C1C26]/20"
+                      onClick={() => triggerToast("Devices manage — coming soon.")}
+                      className="w-full text-left flex justify-between items-center transition-all font-sans px-4 py-3 rounded-xl cursor-pointer bg-transparent text-[#8B8B98] hover:text-[#F4F4F6] hover:bg-[#1C1C26]/40"
                     >
                       <div className="flex items-center gap-2.5">
                         <Smartphone className="w-[18px] h-[18px] shrink-0 text-[#8B8B98]" />
@@ -637,7 +704,8 @@ export default function App() {
                   <div className="flex flex-col">
                     <button
                       type="button"
-                      className="w-full text-left flex justify-between items-center transition-all font-sans px-4 py-3 rounded-xl cursor-default bg-transparent text-[#8B8B98] hover:text-[#F4F4F6] hover:bg-[#1C1C26]/20"
+                      onClick={() => triggerToast("Admin functions — coming soon.")}
+                      className="w-full text-left flex justify-between items-center transition-all font-sans px-4 py-3 rounded-xl cursor-pointer bg-transparent text-[#8B8B98] hover:text-[#F4F4F6] hover:bg-[#1C1C26]/40"
                     >
                       <div className="flex items-center gap-2.5">
                         <Lock className="w-[18px] h-[18px] shrink-0 text-[#8B8B98]" />
@@ -651,7 +719,8 @@ export default function App() {
                   <div className="flex flex-col">
                     <button
                       type="button"
-                      className="w-full text-left flex justify-between items-center transition-all font-sans px-4 py-3 rounded-xl cursor-default bg-transparent text-[#8B8B98] hover:text-[#F4F4F6] hover:bg-[#1C1C26]/20"
+                      onClick={() => triggerToast("Technicians module — coming soon.")}
+                      className="w-full text-left flex justify-between items-center transition-all font-sans px-4 py-3 rounded-xl cursor-pointer bg-transparent text-[#8B8B98] hover:text-[#F4F4F6] hover:bg-[#1C1C26]/40"
                     >
                       <div className="flex items-center gap-2.5">
                         <Wrench className="w-[18px] h-[18px] shrink-0 text-[#8B8B98]" />

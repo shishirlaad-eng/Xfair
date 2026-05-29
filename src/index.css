@@ -1,42 +1,24 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Inter", sans-serif;
-  --font-mono: "JetBrains Mono", monospace;
-
-  /* Custom Swiss palette additions */
-  --color-xfair-orange: #F35D00;
-  --color-xfair-orange-dark: #C24A00;
-  --color-xfair-orange-light: #FFE7D6;
-  
-  --color-navy-dark: #2F3747;
-  --color-navy-slate: #2F3747;
-  --color-navy-sidebar: #2F3747;
-  
-  --shadow-premium: 0 4px 20px -2px rgba(10, 15, 30, 0.05), 0 2px 8px -1px rgba(10, 15, 30, 0.03);
-  --shadow-active: 0 10px 30px -4px rgba(243, 93, 0, 0.08), 0 4px 12px -2px rgba(10, 15, 30, 0.04);
+  --color-orange-50: #fffaf4;
+  --color-orange-100: #fef1e1;
+  --color-orange-200: #fddcbd;
+  --color-orange-300: #fbc28d;
+  --color-orange-400: #faaa5c;
+  --color-orange-500: #f89728;
+  --color-orange-600: #df7c1a;
+  --color-orange-700: #b95d14;
+  --color-orange-800: #934612;
+  --color-orange-850: #813c0e;
+  --color-orange-900: #763711;
+  --color-orange-950: #421c07;
 }
 
-/* Base resets & scrollbars for maximum operational density */
-*, ::before, ::after {
-  font-family: "Inter", sans-serif !important;
-}
-
-html, body {
-  background-color: #f6f6f6 !important;
-  color: #1F2937;
-  font-family: "Inter", sans-serif !important;
-  font-size: 13px; /* High operational density default */
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* Premium scrollbar modeling suitable for high-density enterprise software - styled in neutral elegant tones */
+/* Custom scrollbars for the whole application to make it UI trending and professional */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -44,56 +26,33 @@ html, body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #FFE7D6;
-  border-radius: 6px;
+  background: rgba(156, 163, 175, 0.2);
+  border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #FFD4B8;
+  background: rgba(156, 163, 175, 0.4);
 }
 
-/* Custom theme-colored scrollbars */
-.custom-scrollbar-dark::-webkit-scrollbar {
-  width: 8.5px;
-  height: 8.5px;
-}
-.custom-scrollbar-dark::-webkit-scrollbar-track {
-  background: #111116;
-}
-.custom-scrollbar-dark::-webkit-scrollbar-thumb {
-  background: #FFE7D6;
-  border-radius: 6px;
-  border: 1.5px solid #111116;
-}
-.custom-scrollbar-dark::-webkit-scrollbar-thumb:hover {
-  background: #FFD4B8;
+/* Custom dark scrollbar for scrolling sidebar categories */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
 
-.custom-scrollbar-light::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-.custom-scrollbar-light::-webkit-scrollbar-track {
-  background: #F3F4F6;
-}
-.custom-scrollbar-light::-webkit-scrollbar-thumb {
-  background: #FFE7D6;
-  border-radius: 6px;
-}
-.custom-scrollbar-light::-webkit-scrollbar-thumb:hover {
-  background: #FFD4B8;
+.custom-sidebar-scrollbar::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
 }
 
-@keyframes pulse-soft {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.85; transform: scale(0.98); }
+.custom-sidebar-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
 }
 
-.animate-pulse-soft {
-  animation: pulse-soft 2s infinite ease-in-out;
+.custom-sidebar-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 4px;
 }
 
-/* Focused input styling transitions */
-input, select, textarea {
-  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+.custom-sidebar-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
 }

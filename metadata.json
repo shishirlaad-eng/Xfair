@@ -1,6 +1,6 @@
 {
-  "name": "Remix: Remix: Remix: Remix: Final admin panel: XFAIR EMS Modernized UI",
-  "description": "A premium modern enterprise UI redesign mockup for the XFAIR EMS platform, presenting detailed visual modernizations for Module manager, Event manager, Registration manager, Criteria manager, and Hotel manager.",
+  "name": "Remix: Remix: XFAIR Enterprise Admin Backend",
+  "description": "Next-generation SaaS-based Event Management System for XFAIR with dynamic branding color engines, interactive attendance calendars, and executive portals.",
   "requestFramePermissions": [],
   "majorCapabilities": [
     "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"

@@ -3,358 +3,107 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { ModuleItem, EventItem, RegistrationItem, CriteriaItem, HotelItem } from './types';
+import { ThemeConfig, EventData, EmployeeProfile, ThemePreset } from './types';
 
-export const INITIAL_MODULE_ITEMS: ModuleItem[] = [
+export const THEME_PRESETS: ThemePreset[] = [
   {
-    id: 30,
-    active: true,
-    name: 'Access Control',
-    code: 'accesscontrol',
-    translations: [
-      { lang: 'US', value: 'Access Control' },
-      { lang: 'UK', value: 'Access Control' },
-      { lang: 'DE', value: 'Zutrittskontrolle' }
-    ],
-    descriptionTranslations: [
-      { lang: 'US', value: 'System of granting or denying access.' },
-      { lang: 'UK', value: 'System of granting or denying access.' },
-      { lang: 'DE', value: 'System zur Gewährung oder Verweigerung des Zugangs.' }
-    ],
-    path: '~/Persons/AccessControl.aspx',
-    registrationPath: '~/Registration/Modules/AccessControl.aspx',
-    alwaysActive: false,
-    isLogged: true,
-    moduleForRegistration: true
+    id: 'xfair-classic',
+    name: 'XFAIR Brand Classic',
+    theme: {
+      companyName: 'XFAIR.org',
+      logoUrl: '', // Will render custom vector in component if empty
+      faviconUrl: '',
+      loginBackgroundUrl: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200&auto=format&fit=crop',
+      emailHeaderLogoUrl: '',
+      primaryColor: '#f89728',
+      secondaryColor: '#1E1E24',
+      accentColor: '#F6F6F6',
+      successColor: '#10B981',
+      warningColor: '#F59E0B',
+      errorColor: '#EF4444',
+      infoColor: '#3B82F6',
+      textColor: '#1F2937',
+      backgroundColor: '#F6F6F6',
+      cardColor: '#FFFFFF',
+      borderColor: '#E5E7EB',
+      fontFamily: 'Inter',
+    },
   },
   {
-    id: 36,
-    active: true,
-    name: 'Accompanying person (single)',
-    code: 'singleaccompanyingperson',
-    translations: [
-      { lang: 'US', value: 'Accompanying person (single)' },
-      { lang: 'UK', value: 'Accompanying person (single)' },
-      { lang: 'DE', value: 'Begleitperson (Einzel)' }
-    ],
-    descriptionTranslations: [
-      { lang: 'US', value: 'Used to enter a single accompanying person (or guest).' },
-      { lang: 'UK', value: 'Used to enter a single accompanying person (or guest).' },
-      { lang: 'DE', value: 'Dient zur Erfassung einer einzelnen Begleitperson (oder eines Gastes).' }
-    ],
-    path: '~/Persons/AccompanyingPersons.aspx',
-    registrationPath: '~/Registration/Modules/SingleResponsiblePersonModule.aspx',
-    alwaysActive: false,
-    isLogged: true,
-    moduleForRegistration: true
+    id: 'stripe-minimal',
+    name: 'Stripe Slate Dashboard',
+    theme: {
+      companyName: 'XFAIR Enterprise',
+      logoUrl: '',
+      faviconUrl: '',
+      loginBackgroundUrl: 'https://images.unsplash.com/photo-1557683316-973673baf926?q=80&w=1200&auto=format&fit=crop',
+      emailHeaderLogoUrl: '',
+      primaryColor: '#635BFF',
+      secondaryColor: '#0A85EA',
+      accentColor: '#7970FF',
+      successColor: '#00D4B2',
+      warningColor: '#FFB800',
+      errorColor: '#FF2E74',
+      infoColor: '#00D4B2',
+      textColor: '#0A2540',
+      backgroundColor: '#FAFCFF',
+      cardColor: '#FFFFFF',
+      borderColor: '#ECEFF1',
+      fontFamily: 'Inter',
+    },
   },
   {
-    id: 37,
-    active: false,
-    name: 'Accompanying persons',
-    code: 'multipleaccompanyingpersons',
-    translations: [
-      { lang: 'US', value: 'Accompanying persons' },
-      { lang: 'UK', value: 'Accompanying persons' },
-      { lang: 'DE', value: 'Begleitpersonen' }
-    ],
-    descriptionTranslations: [
-      { lang: 'US', value: 'Group of accompanying persons.' },
-      { lang: 'UK', value: 'Group of accompanying persons.' },
-      { lang: 'DE', value: 'Liste von Begleitpersonen.' }
-    ],
-    path: '~/Persons/GroupAccompanying.aspx',
-    registrationPath: '~/Registration/Modules/GroupAccompanying.aspx',
-    alwaysActive: false,
-    isLogged: false,
-    moduleForRegistration: false
+    id: 'linear-dark',
+    name: 'Linear Obsidian Theme',
+    theme: {
+      companyName: 'XFAIR Pro',
+      logoUrl: '',
+      faviconUrl: '',
+      loginBackgroundUrl: 'https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=1200&auto=format&fit=crop',
+      emailHeaderLogoUrl: '',
+      primaryColor: '#5E6AD2',
+      secondaryColor: '#FF4757',
+      accentColor: '#848EED',
+      successColor: '#2ED573',
+      warningColor: '#FFA502',
+      errorColor: '#FF4757',
+      infoColor: '#1E90FF',
+      textColor: '#F1F2F6',
+      backgroundColor: '#121214',
+      cardColor: '#1C1C1F',
+      borderColor: '#2D2D34',
+      fontFamily: 'Inter',
+    },
   },
   {
-    id: 38,
-    active: false,
-    name: 'Add new employee',
-    code: 'addemployee',
-    translations: [
-      { lang: 'US', value: 'Add new employee' },
-      { lang: 'UK', value: 'Add new employee' },
-      { lang: 'DE', value: 'Mitarbeiter hinzufügen' }
-    ],
-    descriptionTranslations: [
-      { lang: 'US', value: 'Wizard for adding a new employee' },
-      { lang: 'UK', value: 'Wizard for adding a new employee' },
-      { lang: 'DE', value: 'Assistent zum Hinzufügen von Mitarbeitern' }
-    ],
-    path: '~/Employee/Add.aspx',
-    registrationPath: '',
-    alwaysActive: false,
-    isLogged: true,
-    moduleForRegistration: false
-  },
-  {
-    id: 39,
-    active: false,
-    name: 'Add new visitor',
-    code: 'addvisitor',
-    translations: [
-      { lang: 'US', value: 'Add new visitor' },
-      { lang: 'UK', value: 'Add new visitor' },
-      { lang: 'DE', value: 'Besucher hinzufügen' }
-    ],
-    descriptionTranslations: [
-      { lang: 'US', value: 'Wizard for registering custom visitors' },
-      { lang: 'UK', value: 'Wizard for registering custom visitors' },
-      { lang: 'DE', value: 'Assistent zum Hinzufügen von Besuchern des Events' }
-    ],
-    path: '~/Visitor/Add.aspx',
-    registrationPath: '',
-    alwaysActive: false,
-    isLogged: false,
-    moduleForRegistration: true
-  },
-  {
-    id: 40,
-    active: false,
-    name: 'Advanced Search - Employee',
-    code: 'advsearchemployee',
-    translations: [
-      { lang: 'US', value: 'Advanced Search - Employee' },
-      { lang: 'UK', value: 'Advanced Search - Employee' },
-      { lang: 'DE', value: 'Erweiterte Suche - Mitarbeiter' }
-    ],
-    descriptionTranslations: [],
-    path: '~/Search/Employee.aspx',
-    registrationPath: '',
-    alwaysActive: false,
-    isLogged: false,
-    moduleForRegistration: false
-  },
-  {
-    id: 41,
-    active: false,
-    name: 'Advanced Search - Visitor',
-    code: 'advsearchvisitor',
-    translations: [],
-    descriptionTranslations: [],
-    path: '~/Search/Visitor.aspx',
-    registrationPath: '',
-    alwaysActive: false,
-    isLogged: false,
-    moduleForRegistration: false
-  },
-  {
-    id: 42,
-    active: false,
-    name: 'Appointment request',
-    code: 'appointmentrequest',
-    translations: [],
-    descriptionTranslations: [],
-    path: '~/Request/Appointment.aspx',
-    registrationPath: '',
-    alwaysActive: false,
-    isLogged: false,
-    moduleForRegistration: true
-  },
-  {
-    id: 43,
-    active: false,
-    name: 'Attendance',
-    code: 'attendance',
-    translations: [],
-    descriptionTranslations: [],
-    path: '~/Attendance/Overview.aspx',
-    registrationPath: '',
-    alwaysActive: false,
-    isLogged: true,
-    moduleForRegistration: false
-  },
-  {
-    id: 44,
-    active: false,
-    name: 'Attendance / time',
-    code: 'attendancetime',
-    translations: [],
-    descriptionTranslations: [],
-    path: '~/Attendance/TimeTrack.aspx',
-    registrationPath: '',
-    alwaysActive: false,
-    isLogged: false,
-    moduleForRegistration: false
-  },
-  {
-    id: 45,
-    active: false,
-    name: 'Attendance by month',
-    code: 'attendancemonth',
-    translations: [],
-    descriptionTranslations: [],
-    path: '~/Attendance/MonthlyReport.aspx',
-    registrationPath: '',
-    alwaysActive: false,
-    isLogged: false,
-    moduleForRegistration: false
-  },
-  {
-    id: 46,
-    active: false,
-    name: 'Attendance with tasks and functions',
-    code: 'attendancetasks',
-    translations: [],
-    descriptionTranslations: [],
-    path: '~/Attendance/Tasks.aspx',
-    registrationPath: '',
-    alwaysActive: false,
-    isLogged: true,
-    moduleForRegistration: false
-  },
-  {
-    id: 47,
-    active: false,
-    name: 'Attendance with Timeslots',
-    code: 'attendancetimeslots',
-    translations: [],
-    descriptionTranslations: [],
-    path: '~/Attendance/Timeslots.aspx',
-    registrationPath: '',
-    alwaysActive: false,
-    isLogged: false,
-    moduleForRegistration: false
-  },
-  {
-    id: 48,
-    active: false,
-    name: 'Attending',
-    code: 'attending',
-    translations: [],
-    descriptionTranslations: [],
-    path: '~/Attendance/Attending.aspx',
-    registrationPath: '',
-    alwaysActive: false,
-    isLogged: false,
-    moduleForRegistration: false
-  },
-  {
-    id: 49,
-    active: false,
-    name: 'Brochure Item',
-    code: 'brochureitem',
-    translations: [],
-    descriptionTranslations: [],
-    path: '~/Items/Brochures.aspx',
-    registrationPath: '',
-    alwaysActive: false,
-    isLogged: false,
-    moduleForRegistration: false
-  },
-  {
-    id: 50,
-    active: false,
-    name: 'Calendar',
-    code: 'calendar',
-    translations: [],
-    descriptionTranslations: [],
-    path: '~/Tools/Calendar.aspx',
-    registrationPath: '',
-    alwaysActive: false,
-    isLogged: false,
-    moduleForRegistration: false
-  },
-  {
-    id: 51,
-    active: false,
-    name: 'Company coordinators',
-    code: 'companycoordinators',
-    translations: [],
-    descriptionTranslations: [],
-    path: '~/Coordinators/Company.aspx',
-    registrationPath: '',
-    alwaysActive: false,
-    isLogged: false,
-    moduleForRegistration: false
-  },
-  {
-    id: 52,
-    active: false,
-    name: 'Coordinator - Add new Person',
-    code: 'coordinatoraddperson',
-    translations: [],
-    descriptionTranslations: [],
-    path: '~/Coordinators/AddPerson.aspx',
-    registrationPath: '',
-    alwaysActive: false,
-    isLogged: false,
-    moduleForRegistration: false
-  },
-  {
-    id: 53,
-    active: false,
-    name: 'Create account',
-    code: 'createaccount',
-    translations: [],
-    descriptionTranslations: [],
-    path: '~/Profile/Security.aspx',
-    registrationPath: '',
-    alwaysActive: false,
-    isLogged: false,
-    moduleForRegistration: false
-  },
-  {
-    id: 54,
-    active: false,
-    name: 'Credit card',
-    code: 'creditcard',
-    translations: [],
-    descriptionTranslations: [],
-    path: '~/Billing/CreditCard.aspx',
-    registrationPath: '',
-    alwaysActive: false,
-    isLogged: false,
-    moduleForRegistration: false
-  },
-  {
-    id: 55,
-    active: false,
-    name: 'Criteria',
-    code: 'criteria',
-    translations: [],
-    descriptionTranslations: [],
-    path: '~/Settings/Criteria.aspx',
-    registrationPath: '',
-    alwaysActive: false,
-    isLogged: false,
-    moduleForRegistration: false
-  },
-  {
-    id: 56,
-    active: false,
-    name: 'Criteria groups',
-    code: 'criteriagroups',
-    translations: [],
-    descriptionTranslations: [],
-    path: '~/Settings/CriteriaGroups.aspx',
-    registrationPath: '',
-    alwaysActive: false,
-    isLogged: false,
-    moduleForRegistration: false
-  },
-  {
-    id: 57,
-    active: false,
-    name: 'Data security',
-    code: 'datasecurity',
-    translations: [],
-    descriptionTranslations: [],
-    path: '~/Settings/SecurityRegulations.aspx',
-    registrationPath: '',
-    alwaysActive: false,
-    isLogged: false,
-    moduleForRegistration: false
+    id: 'monday-creative',
+    name: 'Monday.com Energetic',
+    theme: {
+      companyName: 'XFAIR Creative',
+      logoUrl: '',
+      faviconUrl: '',
+      loginBackgroundUrl: 'https://images.unsplash.com/photo-1541701494587-cb58502866ab?q=80&w=1200&auto=format&fit=crop',
+      emailHeaderLogoUrl: '',
+      primaryColor: '#00C875',
+      secondaryColor: '#FFCB00',
+      accentColor: '#0085FF',
+      successColor: '#00C87GREEN',
+      warningColor: '#FFCB00',
+      errorColor: '#E2445C',
+      infoColor: '#0085FF',
+      textColor: '#2E2D32',
+      backgroundColor: '#F7F8F9',
+      cardColor: '#FFFFFF',
+      borderColor: '#E1E4E6',
+      fontFamily: 'Inter',
+    },
   }
 ];
 
-export const INITIAL_EVENT: EventItem = {
+export const MOCK_EVENT: EventData = {
   id: 160,
   name: 'Bauma 2028',
-  address: '3166 Blue Laguna Street, 85716, Unterschleissheim, Bayern, Germany',
+  address: '31366 Blue Laguna Street, 85716, Unterschleissheim, Bayern, Germany',
   startDate: '2028-03-03',
   endDate: '2028-03-10',
   attendanceDaysBefore: 2,
@@ -367,304 +116,142 @@ export const INITIAL_EVENT: EventItem = {
   website: 'https://bauma.de/',
   externalIdentifier: 'test20250',
   externalIdentifierCode: 'test2024',
-  isTemplate: false
-};
-
-export const INITIAL_REGISTRATION: RegistrationItem = {
-  id: 168,
-  type: 'Visitor',
   active: true,
-  onePage: false,
-  nameTranslations: [
-    { lang: 'US', value: 'Visitor Registration 2028' },
-    { lang: 'UK', value: 'Visitor Registration 2028' },
-    { lang: 'DE', value: 'Besucherregistrierung 2028' }
+  image: 'ChatGPT_Image_May_12__2026__02_15_00_PM-removebg-preview.png',
+  pdfSummaryMail: { name: 'bauma2028_summary_layout_v2.pdf', size: '2.4 MB' },
+  pdfTemplateHotel: { name: 'hotel_booking_voucher_template.pdf', size: '1.1 MB' },
+  availableRegistrations: [
+    'Add New Employee (Appointment)',
+    'Add New Visitor (Appointment)',
+    'New Registration - Custom Host',
+    'VIP Customer Self-Registration',
+    'Exhibitor Standard Registration',
+    'Survey 2028 Feedback Form',
+    'Visitor Registration 2028 Pool',
+    'Employee Registration 2028 Standard'
   ],
-  customTextTranslations: [
-    { lang: 'US', value: '' },
-    { lang: 'UK', value: '' },
-    { lang: 'DE', value: '' }
+  configurationModules: [
+    'Client manager',
+    'Event module manager',
+    'Event fields manager',
+    'Event order manager',
+    'Event order configuration',
+    'Event permissions',
+    'Event criteria manager',
+    'Criteria group manager',
+    'Access control manager',
+    'Email addresses manager',
+    'Email templates',
+    'Visitor report templates',
+    'Dynamic page content manager',
+    'Event wallet',
+    'Event fairdays and timeslots',
+    'Time slot / function',
+    'Event taxes',
+    'Event invoices manager',
+    'Event API manager',
+    'Mobile phones',
+    'Locker keys'
   ],
-  startDate: '2025-11-14',
-  endDate: '2028-03-08',
-  attendanceStartDate: '2028-03-03',
-  attendanceEndDate: '2028-03-08',
-  hotelArrivalDate: '2028-03-01',
-  hotelDepartureDate: '2028-03-09',
-  hotelStartDate: '2028-03-03',
-  hotelEndDate: '2028-03-09',
-  restrictedUrl: 'https://www.xfair.org/ems_test/Registration/default.aspx?REGID=D26DC638-2F3E-4145-80F3-53E7223ABEC3',
-  redirectUrl: 'https://www.xfair.org/ems_testrd/registration',
-  redirectUrlLogout: '',
-  redirectUrlNotAttending: 'https://www.xfair.org/ems_testrd/registration',
-  status: 'Production'
 };
 
-export const INITIAL_CRITERIA_ITEMS: CriteriaItem[] = [
-  {
-    id: 1001,
-    name: 'Areas',
-    active: true,
-    shortNameTranslations: [
-      { lang: 'US', value: 'Areas' },
-      { lang: 'UK', value: 'Areas' },
-      { lang: 'DE', value: 'Bereiche' }
+export const MOCK_EMPLOYEE: EmployeeProfile = {
+  id: 'EMP-902',
+  name: 'Mr. Steven Terry',
+  company: 'XFAIR GmbH',
+  avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=300&auto=format&fit=crop', // Realistic avatar
+  position: 'Head of Development',
+  department: 'Development',
+  costCenter: 'XFAIR',
+  email: 'steven.terry@xfair.com',
+  phone: '+4989309096829',
+  mobile: '+4917619096829',
+  companyAddress: 'Elisabeth-Schiemann-Bogen 1, 85716, Unterschleißheim, Germany',
+  criteria: {
+    areas: ['Fair'],
+    businessUnit: ['Business unit 22'],
+    companyFunction: ['Security'],
+    countryResponsibility: ['Argentina', 'Azerbaijan', 'South Africa'],
+    executives: ['Executive: Mr. Test 1', 'Assistant: Mrs. Test 2'],
+    foodPreferences: ['english'],
+    industrySegment: ['Automotive'],
+    languages: [
+      'Afrikaans', 'Albanian', 'Arabic (Algeria)', 'English', 'English (Australia)',
+      'English (USA)', 'French', 'Hebrew', 'Italian', 'Lithuanian',
+      'Other 1: swahilki', 'Serbian', 'Spanish'
     ],
-    criteriaTranslations: [
-      { lang: 'US', value: 'Areas' },
-      { lang: 'UK', value: 'Areas' },
-      { lang: 'DE', value: 'Bereiche' }
-    ],
-    descriptionTranslations: [],
-    type: 'Employee',
-    additionalComments: false,
-    multiSelect: true
+    productGroup: ['Computer', 'Fair Services & \' ; , Network'],
   },
-  {
-    id: 1002,
-    name: 'Business unit',
-    active: true,
-    shortNameTranslations: [
-      { lang: 'US', value: 'Business unit' },
-      { lang: 'UK', value: 'Business unit' },
-      { lang: 'DE', value: 'Geschäftsbereich' }
-    ],
-    criteriaTranslations: [],
-    descriptionTranslations: [],
-    type: 'Employee',
-    additionalComments: false,
-    multiSelect: false
-  },
-  {
-    id: 1006,
-    name: 'Company Function',
-    active: true,
-    shortNameTranslations: [
-      { lang: 'US', value: 'Company Function' },
-      { lang: 'UK', value: 'Company Function' },
-      { lang: 'DE', value: 'Funktion in der Firma' }
-    ],
-    criteriaTranslations: [
-      { lang: 'US', value: 'Company Function' },
-      { lang: 'UK', value: 'Company Function' },
-      { lang: 'DE', value: 'Funktion in der Firma' }
-    ],
-    descriptionTranslations: [
-      { lang: 'US', value: 'Please select your function in the company.' },
-      { lang: 'UK', value: 'Please select your function in the company.' },
-      { lang: 'DE', value: 'Bitte geben Sie Ihre Funktion im Unternehmen ein.' }
-    ],
-    type: 'Employee',
-    additionalComments: false,
-    multiSelect: true
-  },
-  {
-    id: 1007,
-    name: 'Country Responsibility',
-    active: true,
-    shortNameTranslations: [
-      { lang: 'US', value: 'Country Responsibility' },
-      { lang: 'UK', value: 'Country Responsibility' },
-      { lang: 'DE', value: 'Länderverantwortung' }
-    ],
-    criteriaTranslations: [],
-    descriptionTranslations: [],
-    type: 'Employee',
-    additionalComments: true,
-    multiSelect: true
-  },
-  {
-    id: 1008,
-    name: 'Department',
-    active: true,
-    shortNameTranslations: [
-      { lang: 'US', value: 'Department' },
-      { lang: 'DE', value: 'Abteilung' }
-    ],
-    criteriaTranslations: [],
-    descriptionTranslations: [],
-    type: 'Employee',
-    additionalComments: false,
-    multiSelect: false
-  },
-  {
-    id: 1009,
-    name: 'Division',
-    active: true,
-    shortNameTranslations: [],
-    criteriaTranslations: [],
-    descriptionTranslations: [],
-    type: 'Employee',
-    additionalComments: false,
-    multiSelect: false
-  },
-  {
-    id: 1010,
-    name: 'Employee Department Criteria',
-    active: true,
-    shortNameTranslations: [],
-    criteriaTranslations: [],
-    descriptionTranslations: [],
-    type: 'Employee',
-    additionalComments: false,
-    multiSelect: true
-  },
-  {
-    id: 1011,
-    name: 'Executives',
-    active: true,
-    shortNameTranslations: [],
-    criteriaTranslations: [],
-    descriptionTranslations: [],
-    type: 'Employee',
-    additionalComments: false,
-    multiSelect: false
-  },
-  {
-    id: 1012,
-    name: 'Fair function',
-    active: true,
-    shortNameTranslations: [],
-    criteriaTranslations: [],
-    descriptionTranslations: [],
-    type: 'Employee',
-    additionalComments: false,
-    multiSelect: false
-  },
-  {
-    id: 1013,
-    name: 'Flags on Badge',
-    active: true,
-    shortNameTranslations: [],
-    criteriaTranslations: [],
-    descriptionTranslations: [],
-    type: 'Employee',
-    additionalComments: false,
-    multiSelect: true
-  },
-  {
-    id: 1014,
-    name: 'Food preferences',
-    active: true,
-    shortNameTranslations: [],
-    criteriaTranslations: [],
-    descriptionTranslations: [],
-    type: 'Employee',
-    additionalComments: true,
-    multiSelect: true
-  },
-  {
-    id: 1015,
-    name: 'Function',
-    active: true,
-    shortNameTranslations: [],
-    criteriaTranslations: [],
-    descriptionTranslations: [],
-    type: 'Employee',
-    additionalComments: false,
-    multiSelect: false
-  },
-  {
-    id: 1016,
-    name: 'Industry segment',
-    active: true,
-    shortNameTranslations: [],
-    criteriaTranslations: [],
-    descriptionTranslations: [],
-    type: 'Employee',
-    additionalComments: false,
-    multiSelect: false
-  },
-  {
-    id: 1017,
-    name: 'Kick-Off-Meeting',
-    active: true,
-    shortNameTranslations: [],
-    criteriaTranslations: [],
-    descriptionTranslations: [],
-    type: 'Employee',
-    additionalComments: false,
-    multiSelect: false
-  },
-  {
-    id: 1018,
-    name: 'Languages',
-    active: true,
-    shortNameTranslations: [],
-    criteriaTranslations: [],
-    descriptionTranslations: [],
-    type: 'Employee',
-    additionalComments: false,
-    multiSelect: true
-  },
-  {
-    id: 1019,
-    name: 'Product Group',
-    active: true,
-    shortNameTranslations: [],
-    criteriaTranslations: [],
-    descriptionTranslations: [],
-    type: 'Employee',
-    additionalComments: false,
-    multiSelect: true
-  },
-  {
-    id: 1020,
-    name: 'Product Responsibility',
-    active: true,
-    shortNameTranslations: [],
-    criteriaTranslations: [],
-    descriptionTranslations: [],
-    type: 'Employee',
-    additionalComments: false,
-    multiSelect: true
+  appointments: [
+    {
+      id: 'APT-101',
+      room: 'Common room',
+      subject: 'Common Room Welcome and Briefing',
+      time: '3/1/2028 7:00 AM - 7:10 AM',
+      details: 'Kick-off and health-and-safety guidelines review with the team.'
+    },
+    {
+      id: 'APT-102',
+      room: 'Room 1',
+      subject: 'Meeting with Coca Cola team',
+      time: '3/1/2028 7:30 AM - 8:15 AM',
+      details: 'Review tech stack demo for the main stand displays.'
+    },
+    {
+      id: 'APT-103',
+      room: 'Main Hall',
+      subject: 'VIP Keynote Presentation',
+      time: '3/4/2028 10:00 AM - 11:30 AM',
+      details: 'Speech regarding decentralized stand technologies.'
+    }
+  ],
+  services: [
+    {
+      id: 'SRV-001',
+      name: 'Morning day1 Catering Stand setup & briefing',
+      time: '3/3/2028 8:00 AM - 12:00 PM',
+      status: 'Confirmed'
+    },
+    {
+      id: 'SRV-002',
+      name: 'Product Trial Run & Network latency check',
+      time: '3/3/2028 8:00 AM - 8:00 PM',
+      status: 'Confirmed'
+    },
+    {
+      id: 'SRV-003',
+      name: 'Evening Reception Technical Lead Presence',
+      time: '3/6/2028 6:00 PM - 10:00 PM',
+      status: 'Pending'
+    }
+  ],
+  deputies: ['Mr. Arslan Anwar Khawaja', 'Mr. Chirag Patel'],
+  attendance: {
+    1: 'none',
+    2: 'none',
+    3: 'none',
+    4: 'present',
+    5: 'present',
+    6: 'present',
+    7: 'present',
+    8: 'present',
+    9: 'present',
+    10: 'present',
+    11: 'none',
+    12: 'none',
+    13: 'absent',
+    14: 'present',
+    15: 'present',
+    16: 'none',
+    17: 'none',
+    18: 'present',
+    19: 'present',
+    20: 'present',
+    21: 'present',
+    22: 'none',
+    23: 'none',
+    24: 'present',
+    25: 'pending',
+    26: 'pending'
   }
-];
-
-export const INITIAL_HOTEL_ITEMS: HotelItem[] = [
-  {
-    id: 201,
-    active: true,
-    name: 'Mariotte',
-    stars: 5,
-    area: '',
-    address: '',
-    contingents: 2
-  },
-  {
-    id: 202,
-    active: true,
-    name: 'Murree Hotel',
-    stars: 3,
-    area: 'Main City',
-    address: 'Ohmstrasse 1, 85716, Unterschleissheim, Germany',
-    contingents: 2
-  },
-  {
-    id: 203,
-    active: true,
-    name: 'New hotel',
-    stars: 0,
-    area: '',
-    address: '',
-    contingents: 0
-  },
-  {
-    id: 204,
-    active: true,
-    name: 'Pearl Continental',
-    stars: 5,
-    area: 'Central Munich',
-    address: 'Frankfurterstr 1000, 97638, Bali, Angola',
-    contingents: 1
-  },
-  {
-    id: 205,
-    active: true,
-    name: 'Taj Hotels',
-    stars: 4,
-    area: 'Mountains and Hills',
-    address: 'Hausmehringerstr. 1, 85405, Nandlstadt, Germany',
-    contingents: 2
-  }
-];
+};

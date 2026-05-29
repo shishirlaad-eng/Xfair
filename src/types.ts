@@ -3,26 +3,35 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-export interface TranslationField {
-  lang: 'US' | 'UK' | 'DE';
-  value: string;
+export interface ThemeConfig {
+  companyName: string;
+  logoUrl: string;
+  faviconUrl: string;
+  loginBackgroundUrl: string;
+  emailHeaderLogoUrl: string;
+  
+  // Color configuration
+  primaryColor: string;
+  secondaryColor: string;
+  accentColor: string;
+  successColor: string;
+  warningColor: string;
+  errorColor: string;
+  infoColor: string;
+  textColor: string;
+  backgroundColor: string;
+  cardColor: string;
+  borderColor: string;
+  
+  // Typography
+  fontFamily: string;
+  
+  // Login customization
+  loginMainTitle?: string;
+  loginSubTitle?: string;
 }
 
-export interface ModuleItem {
-  id: number;
-  active: boolean;
-  name: string;
-  code: string;
-  translations: TranslationField[];
-  descriptionTranslations: TranslationField[];
-  path: string;
-  registrationPath: string;
-  alwaysActive: boolean;
-  isLogged: boolean;
-  moduleForRegistration: boolean;
-}
-
-export interface EventItem {
+export interface EventData {
   id: number;
   name: string;
   address: string;
@@ -38,63 +47,61 @@ export interface EventItem {
   website: string;
   externalIdentifier: string;
   externalIdentifierCode: string;
-  isTemplate: boolean;
-}
-
-export interface RegistrationItem {
-  id: number;
-  type: string;
   active: boolean;
-  onePage: boolean;
-  nameTranslations: TranslationField[];
-  customTextTranslations: TranslationField[];
-  startDate: string;
-  endDate: string;
-  attendanceStartDate: string;
-  attendanceEndDate: string;
-  hotelArrivalDate: string;
-  hotelDepartureDate: string;
-  hotelStartDate: string;
-  hotelEndDate: string;
-  restrictedUrl: string;
-  redirectUrl: string;
-  redirectUrlLogout: string;
-  redirectUrlNotAttending: string;
-  status: string;
+  image: string;
+  pdfSummaryMail?: { name: string; size: string };
+  pdfTemplateHotel?: { name: string; size: string };
+  availableRegistrations: string[];
+  configurationModules: string[];
 }
 
-export interface CriteriaItem {
-  id: number;
+export interface Appointment {
+  id: string;
+  room: string;
+  subject: string;
+  time: string;
+  details: string;
+}
+
+export interface ServiceItem {
+  id: string;
   name: string;
-  active: boolean;
-  shortNameTranslations: TranslationField[];
-  criteriaTranslations: TranslationField[];
-  descriptionTranslations: TranslationField[];
-  type: string;
-  additionalComments: boolean;
-  multiSelect: boolean;
+  time: string;
+  status: 'Confirmed' | 'Pending' | 'Cancelled';
 }
 
-export interface HotelItem {
-  id: number;
-  active: boolean;
+export interface EmployeeProfile {
+  id: string;
   name: string;
-  stars: number;
-  area: string;
-  address: string;
-  contingents: number;
+  company: string;
+  avatar: string;
+  position: string;
+  department: string;
+  costCenter: string;
+  email: string;
+  phone: string;
+  mobile: string;
+  companyAddress: string;
+  criteria: {
+    areas: string[];
+    businessUnit: string[];
+    companyFunction: string[];
+    countryResponsibility: string[];
+    executives: string[];
+    foodPreferences: string[];
+    industrySegment: string[];
+    languages: string[];
+    productGroup: string[];
+  };
+  appointments: Appointment[];
+  services: ServiceItem[];
+  deputies: string[];
+  // Day-by-day attendance status for March 2028
+  attendance: { [day: number]: 'present' | 'absent' | 'pending' | 'none' };
 }
 
-export type ActiveScreen =
-  | 'module-manager'
-  | 'event-manager'
-  | 'registration-manager'
-  | 'criteria-manager'
-  | 'theme-manager'
-  | 'hotel-manager'
-  | 'employees'
-  | 'employee-detail';
-
-export interface ThemeSettings {
-  mode: 'premium' | 'legacy';
+export interface ThemePreset {
+  id: string;
+  name: string;
+  theme: ThemeConfig;
 }

@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+@theme {
+  --color-orange-50: #fffaf4;
+  --color-orange-100: #fef1e1;
+  --color-orange-200: #fddcbd;
+  --color-orange-300: #fbc28d;
+  --color-orange-400: #faaa5c;
+  --color-orange-500: #f89728;
+  --color-orange-600: #df7c1a;
+  --color-orange-700: #b95d14;
+  --color-orange-800: #934612;
+  --color-orange-850: #813c0e;
+  --color-orange-900: #763711;
+  --color-orange-950: #421c07;
+}
+
+/* Custom scrollbars for the whole application to make it UI trending and professional */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(156, 163, 175, 0.2);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(156, 163, 175, 0.4);
+}
+
+/* Custom dark scrollbar for scrolling sidebar categories */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.custom-sidebar-scrollbar::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+.custom-sidebar-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-sidebar-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 4px;
+}
+
+.custom-sidebar-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
+}

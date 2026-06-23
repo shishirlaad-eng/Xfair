@@ -1,0 +1,8 @@
+{
+  "name": "Remix: Remix: XFAIR Enterprise Admin Backend",
+  "description": "Next-generation SaaS-based Event Management System for XFAIR with dynamic branding color engines, interactive attendance calendars, and executive portals.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
